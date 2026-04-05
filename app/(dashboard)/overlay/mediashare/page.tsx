@@ -141,19 +141,19 @@ function MediasharePreview({
 
       {/* Info bar */}
       <div
-        className="px-4 py-3 text-center text-base"
+        className="px-6 py-5 text-center"
         style={{
           backgroundColor: bg,
-          borderTop: noBorder ? "none" : `3px solid ${hl}`,
+          borderTop: noBorder ? "none" : `4px solid ${hl}`,
         }}
       >
-        <div>
+        <div className="text-3xl leading-snug">
           <span style={{ color: hl }}>{name} </span>
           <span style={{ color: tc }}>{templateText || DEFAULT_TEMPLATE} </span>
           <span style={{ color: hl }}>{nominal}</span>
         </div>
         {message && (
-          <div className="text-sm mt-1" style={{ color: hl }}>
+          <div className="text-2xl mt-2" style={{ color: hl }}>
             {message}
           </div>
         )}

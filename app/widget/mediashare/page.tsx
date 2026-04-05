@@ -135,43 +135,46 @@ export default function WidgetMediasharePage() {
   const templateText = current.ms_template_text || "baru saja memberi";
   const embedUrl = getYouTubeEmbedUrl(current.media_url);
 
+  const googleFontsUrl = `https://fonts.googleapis.com/css2?family=${ff.replace(/ /g, "+")}:wght@${fw}&display=swap`;
+
   return (
     <div
-      className={`fixed inset-0 flex flex-col items-center justify-center transition-all duration-500 ${
+      className={`fixed inset-0 flex flex-col transition-all duration-500 ${
         visible ? "opacity-100" : "opacity-0"
       }`}
       style={{ background: "transparent" }}
     >
+      <style>{`@import url('${googleFontsUrl}');`}</style>
       <div
-        className="w-full max-w-2xl"
+        className="w-full flex flex-col h-full"
         style={{ fontFamily: ff, fontWeight: fw }}
       >
-        {/* Video on top */}
+        {/* Video fills remaining height */}
         {embedUrl ? (
           <iframe
             src={embedUrl}
-            className="w-full aspect-video rounded-t-xl"
+            className="w-full flex-1 rounded-t-xl"
             allow="autoplay; encrypted-media"
             allowFullScreen
           />
         ) : (
           <div
-            className="rounded-t-xl p-4 text-center text-sm break-all aspect-video flex items-center justify-center"
+            className="rounded-t-xl p-4 text-center text-sm break-all flex-1 flex items-center justify-center"
             style={{ backgroundColor: bg, color: tc }}
           >
             {current.media_url}
           </div>
         )}
 
-        {/* Info bar below video */}
+        {/* Info bar pinned at bottom */}
         <div
-          className="px-4 py-3 text-center rounded-b-xl"
+          className="px-6 py-5 text-center rounded-b-xl"
           style={{
             backgroundColor: bg,
-            borderTop: noBorder ? "none" : `3px solid ${hl}`,
+            borderTop: noBorder ? "none" : `4px solid ${hl}`,
           }}
         >
-          <div className="text-base">
+          <div className="text-3xl leading-snug">
             <span style={{ color: hl }}>{current.donor_name} </span>
             <span style={{ color: tc }}>
               {templateText
@@ -184,7 +187,7 @@ export default function WidgetMediasharePage() {
             </span>
           </div>
           {current.message && (
-            <div className="text-sm mt-1" style={{ color: hl }}>
+            <div className="text-2xl mt-2" style={{ color: hl }}>
               {current.message}
             </div>
           )}

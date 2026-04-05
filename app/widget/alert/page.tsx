@@ -175,7 +175,7 @@ export default function WidgetAlertPage() {
 
   return (
     <div
-      className="fixed inset-0 flex items-end justify-center pointer-events-none p-10"
+      className="w-full pointer-events-none"
       style={{ background: "transparent" }}
     >
       {/* Audio unlock button — user clicks once in OBS to enable sound */}
@@ -190,7 +190,7 @@ export default function WidgetAlertPage() {
       )}
       <Card
         style={{ backgroundColor: bg }}
-        className={`font-sans text-center w-full max-w-lg shadow-2xl transition-all duration-500 ${
+        className={`font-sans text-center w-full shadow-2xl transition-all duration-500 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >

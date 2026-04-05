@@ -109,48 +109,45 @@ export default function WidgetMilestonePage() {
 
   return (
     <div
-      className="fixed inset-0 flex items-end justify-center pointer-events-none"
+      className="w-full pointer-events-none"
       style={{ background: "transparent" }}
     >
       <div
-        className="mb-10 w-full max-w-lg px-6 py-4 rounded-2xl"
-        style={{
-          backgroundColor: bg,
-          color: tc,
-          border: noBorder ? "none" : `2px solid ${tc}`,
-        }}
+        className={`w-full px-6 py-4 flex flex-col gap-y-3 ${noBorder ? "" : "border-2 border-black"}`}
+        style={{ backgroundColor: bg }}
       >
         {/* Title */}
         <p
-          className="text-base mb-2"
-          style={{ fontFamily: ffTitle, fontWeight: fw, color: tc }}
+          className="text-center text-2xl font-semibold break-words"
+          style={{
+            fontFamily: ffTitle === "default" ? undefined : ffTitle,
+            fontWeight: fw,
+            color: tc,
+          }}
         >
           {title}
         </p>
 
         {/* Progress bar track */}
-        <div
-          className="w-full rounded-full overflow-hidden"
-          style={{
-            height: 16,
-            backgroundColor: `${tc}30`,
-          }}
-        >
+        <div className="relative w-full h-7 rounded-full border border-black overflow-hidden bg-white">
           <div
-            className="h-full rounded-full transition-all duration-700"
+            className="absolute top-0 left-0 h-full rounded-full transition-all duration-700"
             style={{ width: `${pct}%`, backgroundColor: tc }}
           />
         </div>
 
-        {/* Amounts */}
-        <div
-          className="flex justify-between mt-2 text-sm"
-          style={{ fontFamily: ffContent, color: tc }}
+        {/* Amount centered */}
+        <p
+          className="text-center text-xl"
+          style={{
+            fontFamily: ffContent === "default" ? undefined : ffContent,
+            fontWeight: fw,
+            color: tc,
+          }}
         >
-          <span>Rp {totalRaised.toLocaleString("id-ID")}</span>
-          <span>{pct}%</span>
-          <span>Rp {target.toLocaleString("id-ID")}</span>
-        </div>
+          Rp {totalRaised.toLocaleString("id-ID")} / Rp{" "}
+          {target.toLocaleString("id-ID")}
+        </p>
       </div>
     </div>
   );

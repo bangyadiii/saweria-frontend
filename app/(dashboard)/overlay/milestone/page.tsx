@@ -105,11 +105,11 @@ function MilestonePreview({
 
   return (
     <div
-      className={`w-full rounded-md p-4 flex flex-col gap-y-2 shadow-normal ${!noBorder ? "border-2 border-black" : ""}`}
+      className={`w-full rounded-md p-4 flex flex-col gap-y-3 shadow-normal ${!noBorder ? "border-2 border-black" : ""}`}
       style={{ backgroundColor: bgColor }}
     >
       <p
-        className="text-center font-semibold text-sm break-words"
+        className="text-center text-2xl font-semibold break-words"
         style={{
           color: textColor,
           fontFamily: fontTitle === "default" ? undefined : fontTitle,
@@ -118,14 +118,14 @@ function MilestonePreview({
       >
         {title || "Judul Milestone"}
       </p>
-      <div className="relative w-full h-5 rounded-full border border-black overflow-hidden bg-white">
+      <div className="relative w-full h-7 rounded-full border border-black overflow-hidden bg-white">
         <div
           className="absolute top-0 left-0 h-full rounded-full transition-all"
           style={{ width: `${percent}%`, backgroundColor: textColor }}
         />
       </div>
       <p
-        className="text-center text-xs"
+        className="text-center text-xl"
         style={{
           color: textColor,
           fontFamily: fontContent === "default" ? undefined : fontContent,
