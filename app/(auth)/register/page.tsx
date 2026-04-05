@@ -32,7 +32,7 @@ const formSchema = z
       .max(255)
       .regex(
         /^[a-zA-Z0-9]+$/,
-        "Username can only contain alphanumeric characters"
+        "Username can only contain alphanumeric characters",
       ),
     password: z.string().min(8),
     confirmPassword: z.string(),
@@ -75,7 +75,7 @@ function Register() {
       await $axios.post<RegisterResponse>(REGISTER_ENDPOINT, values);
 
       signIn("credentials", {
-        callbackUrl: "/admin",
+        callbackUrl: "/dashboard",
         redirect: true,
         email: values.email,
         password: values.password,
@@ -104,7 +104,7 @@ function Register() {
             type: "value",
             message: err.message,
           });
-        }
+        },
       );
     }
   };
@@ -164,7 +164,11 @@ function Register() {
                   <FormItem>
                     <FormLabel required>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="password" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -178,7 +182,11 @@ function Register() {
                   <FormItem>
                     <FormLabel required>Konfirmasi Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ulangi password" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="Ulangi password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -189,6 +197,12 @@ function Register() {
               </Button>
             </form>
           </Form>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Sudah punya akun?{" "}
+            <a href="/login" className="underline font-medium">
+              Login di sini
+            </a>
+          </p>
         </CardContent>
       </Card>
     </div>

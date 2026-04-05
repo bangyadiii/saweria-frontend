@@ -7,8 +7,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Form, FormField } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import $axios from "@/lib/axios";
+import { OVERLAY_FILTER_ENDPOINT } from "@/lib/api-endpoints";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -18,15 +20,32 @@ const formSchema = z.object({
   filter_kata: z.string().optional(),
 });
 
-function FilterKataForm() {
+type FilterKataFormProps = {
+  initialValue?: string;
+};
+
+function FilterKataForm({ initialValue }: FilterKataFormProps) {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       filter_kata: "",
     },
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+
+  React.useEffect(() => {
+    if (initialValue !== undefined) {
+      form.reset({ filter_kata: initialValue });
+    }
+  }, [initialValue, form]);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await $axios.put(OVERLAY_FILTER_ENDPOINT, values);
+      toast({ title: "Filter kata berhasil disimpan" });
+    } catch {
+      toast({ title: "Gagal menyimpan filter kata", variant: "destructive" });
+    }
   };
   return (
     <Card className="bg-gray-50 p-1">

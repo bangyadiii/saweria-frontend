@@ -58,7 +58,7 @@ function Login() {
                 type: "value",
                 message: err.message,
               });
-            }
+            },
           );
           return;
         }
@@ -69,7 +69,9 @@ function Login() {
         return;
       }
 
-      toast.toast({ title: (error as Error).message || "Something went wrong!" });
+      toast.toast({
+        title: (error as Error).message || "Something went wrong!",
+      });
     }
   };
 
@@ -106,7 +108,11 @@ function Login() {
                   <FormItem>
                     <FormLabel required>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="Password" {...field} />
+                      <Input
+                        type="password"
+                        placeholder="Password"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -118,6 +124,12 @@ function Login() {
               </Button>
             </form>
           </Form>
+          <p className="text-center text-sm text-muted-foreground mt-4">
+            Belum punya akun?{" "}
+            <a href="/register" className="underline font-medium">
+              Daftar di sini
+            </a>
+          </p>
         </CardContent>
       </Card>
     </div>

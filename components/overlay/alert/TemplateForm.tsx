@@ -22,35 +22,89 @@ import { RotateCw } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import ColorPicker from "@/components/color-picker";
 import AlertPreview, { PreviewProps } from "./AlertPreview";
+import $axios from "@/lib/axios";
+import { OVERLAY_TEMPLATE_ENDPOINT } from "@/lib/api-endpoints";
+import { useToast } from "@/hooks/use-toast";
+
+const DEFAULT_TEMPLATE = "[nama] baru saja memberikan [nominal]";
 
 const formSchema = z.object({
   background_color: z.string().nullable(),
   highlight_color: z.string().nullable(),
   text_color: z.string().nullable(),
   template_text: z.string(),
-  notification_duration: z.number().nullable(),
+  notification_duration: z.coerce.number().nullable(),
 });
 
-function TemplateForm() {
+type TemplateFormProps = {
+  initialValues?: {
+    background_color: string | null;
+    highlight_color: string | null;
+    text_color: string | null;
+    template_text: string;
+    notification_duration: number | null;
+  };
+};
+
+function TemplateForm({ initialValues }: TemplateFormProps) {
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       background_color: "",
       highlight_color: "",
       text_color: "",
-      template_text: "[nama] baru saja memberikan [nominal]",
+      template_text: DEFAULT_TEMPLATE,
       notification_duration: 0,
     },
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+
+  React.useEffect(() => {
+    if (initialValues) {
+      form.reset({
+        background_color: initialValues.background_color ?? "",
+        highlight_color: initialValues.highlight_color ?? "",
+        text_color: initialValues.text_color ?? "",
+        template_text: initialValues.template_text || DEFAULT_TEMPLATE,
+        notification_duration: initialValues.notification_duration ?? 0,
+      });
+      setSetting({
+        backgroundColor: initialValues.background_color,
+        highlightColor: initialValues.highlight_color,
+        textColor: initialValues.text_color,
+        templateText: initialValues.template_text || DEFAULT_TEMPLATE,
+      });
+    }
+  }, [initialValues, form]);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      await $axios.put(OVERLAY_TEMPLATE_ENDPOINT, values);
+      toast({ title: "Template berhasil disimpan" });
+    } catch {
+      toast({ title: "Gagal menyimpan template", variant: "destructive" });
+    }
+  };
+
+  const onReset = () => {
+    form.setValue("template_text", DEFAULT_TEMPLATE);
+    form.setValue("background_color", "");
+    form.setValue("highlight_color", "");
+    form.setValue("text_color", "");
+    form.setValue("notification_duration", 0);
+    setSetting({
+      backgroundColor: null,
+      highlightColor: null,
+      textColor: null,
+      templateText: DEFAULT_TEMPLATE,
+    });
   };
 
   const [setting, setSetting] = React.useState<PreviewProps>({
     backgroundColor: null,
     highlightColor: null,
     textColor: null,
-    templateText: "[nama] baru saja memberikan [nominal]",
+    templateText: DEFAULT_TEMPLATE,
   });
 
   return (
@@ -61,7 +115,7 @@ function TemplateForm() {
           <span>
             Tampilan:
             <ActionTooltip label="Kembalikan setting ke default">
-              <RotateCw className="hover:animate-spin" />
+              <RotateCw className="hover:animate-spin" onClick={onReset} />
             </ActionTooltip>
           </span>
         </CardHeader>
@@ -81,10 +135,10 @@ function TemplateForm() {
                           <ColorPicker
                             value={field.value}
                             setValue={(hexColor) => {
-                              setSetting({
-                                ...setting,
+                              setSetting((prev) => ({
+                                ...prev,
                                 backgroundColor: hexColor,
-                              });
+                              }));
                               form.setValue("background_color", hexColor);
                             }}
                           />
@@ -110,10 +164,10 @@ function TemplateForm() {
                           <ColorPicker
                             value={field.value}
                             setValue={(hexColor) => {
-                              setSetting({
-                                ...setting,
+                              setSetting((prev) => ({
+                                ...prev,
                                 highlightColor: hexColor,
-                              });
+                              }));
                               form.setValue("highlight_color", hexColor);
                             }}
                           />
@@ -139,10 +193,10 @@ function TemplateForm() {
                           <ColorPicker
                             value={field.value}
                             setValue={(hexColor) => {
-                              setSetting({
-                                ...setting,
+                              setSetting((prev) => ({
+                                ...prev,
                                 textColor: hexColor,
-                              });
+                              }));
                               form.setValue("text_color", hexColor);
                             }}
                           />
@@ -164,15 +218,14 @@ function TemplateForm() {
                         <Input
                           {...field}
                           type="text"
-                          onChange={(...event: any[]) => {
-                            form.setValue(
-                              "template_text",
-                              event[0].target.value
-                            );
-                            setSetting({
-                              ...setting,
-                              templateText: event[0].target.value,
-                            });
+                          onChange={(
+                            e: React.ChangeEvent<HTMLInputElement>,
+                          ) => {
+                            form.setValue("template_text", e.target.value);
+                            setSetting((prev) => ({
+                              ...prev,
+                              templateText: e.target.value,
+                            }));
                           }}
                         />
                       </FormControl>

@@ -6,7 +6,9 @@ export const tabs = [
   { id: "mediashare", label: "MediaShare", href: "/mediashare" },
 ];
 
-function OverlayLayout({ children }: { children: React.ReactNode }) {
+export default function OverlayLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="flex gap-x-8 mt-10">
       <aside className="w-[200px] flex flex-col gap-3">
@@ -16,5 +18,3 @@ function OverlayLayout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
-export default OverlayLayout;

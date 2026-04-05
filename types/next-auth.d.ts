@@ -8,6 +8,7 @@ export interface CustomAuthUser extends User {
     createdAt: Date;
     updatedAt: Date;
     streamKey: string | null;
+    token: string;
 }
 
 declare module "next-auth" {
@@ -25,6 +26,7 @@ declare module "next-auth" {
         createdAt: Date;
         updatedAt: Date;
         streamKey: string | null;
+        token: string;
     }
 }
 

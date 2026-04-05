@@ -20,21 +20,21 @@ const menus = [
     description: "Lihat histori dukungan yang masuk dan cashout di sini.",
     Icon: ChickenMoney,
     backgroundColor: "bg-purple-300",
-    path: null,
+    path: "/donations",
   },
   {
     title: "Dukungan Keluar",
     description: "Lihat histori dukungan yang keluar di sini.",
     Icon: DoggoHappy,
     backgroundColor: "bg-amber-400",
-    path: null,
+    path: "/donations",
   },
   {
     title: "Integration",
     description: "Hubungkan aplikasi pihak ketiga dengan saweria.",
     Icon: RaccoonHappy,
     backgroundColor: "bg-red-300",
-    path: null,
+    path: "/integration",
   },
 ];
 
@@ -43,7 +43,7 @@ function Dashboard() {
     <div className="">
       <div className="grid gap-2 md:gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 mt-10">
         {menus.map((menu, index) => (
-          <Link key={"menu_" + index + menu.title} href={menu.path || "/"}>
+          <Link key={"menu_" + index + menu.title} href={menu.path ?? "/"}>
             <Card
               variant="button"
               className={`h-[300px] ${menu.backgroundColor} m-3 md:m-0`}
