@@ -7,6 +7,7 @@ import React from "react";
 const tabs = [
   { id: "alert", label: "Alert", href: "/alert" },
   { id: "mediashare", label: "MediaShare", href: "/mediashare" },
+  { id: "subathon", label: "Subathon", href: "/subathon" },
   { id: "qrcode", label: "QR Code", href: "/qrcode" },
   { id: "milestone", label: "Milestone", href: "/milestone" },
 ];

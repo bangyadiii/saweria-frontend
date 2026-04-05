@@ -34,17 +34,16 @@ Legend: ✅ Done · 🔧 In Progress / Sliced (UI ada, integrasi BE belum) · �
 
 ## Overlay — Alert (`/overlay/alert`)
 
-- ✅ Sidebar tab (Alert / MediaShare)
+- ✅ Sidebar tab (Alert / MediaShare / Milestone / Subathon)
 - ✅ Form aturan alert — GIF toggle, TTS variant select, minimum alert/mediashare/TTS input
+- ✅ `onSubmit` form aturan alert — hit API (`PUT /overlay/alert`)
 - ✅ Form template alert — color picker background/highlight/text, template text input, notification duration
+- ✅ `onSubmit` form template — hit API (`PUT /overlay/template`)
 - ✅ `AlertPreview` — preview real-time berdasarkan template & warna
-- ✅ `FilterKataForm` — textarea filter kata
-- ✅ `NotificationSound` — UI upload suara / hapus / ganti suara
-- 🔧 `onSubmit` form aturan alert — masih `console.log`, belum hit API (`PUT /overlay/alert`)
-- 🔧 `onSubmit` form template — masih `console.log`, belum hit API (`PUT /overlay/template`)
-- 🔧 `onSubmit` filter kata — masih `console.log`, belum hit API (`PUT /overlay/filter`)
-- 🔧 Upload suara notifikasi — belum hit API (`PUT /overlay/sound`)
-- ❌ Load initial data dari BE saat halaman dibuka (`GET /overlay/settings`)
+- ✅ `FilterKataForm` — textarea filter kata, hit API (`PUT /overlay/filter`)
+- ✅ `NotificationSound` — upload/hapus/ganti suara, hit API (`PUT /overlay/sound`)
+- ✅ Load initial data dari BE saat halaman dibuka (`GET /overlay/settings`)
+- ✅ Tombol Tes Alert — `POST /overlay/test-alert` broadcast WS ke widget
 - ❌ Reset template ke default (tombol `RotateCw` ada tapi belum ada logic)
 
 ---
@@ -52,15 +51,39 @@ Legend: ✅ Done · 🔧 In Progress / Sliced (UI ada, integrasi BE belum) · �
 ## Overlay — MediaShare (`/overlay/mediashare`)
 
 - ✅ Route & sidebar tab tersedia
-- ❌ UI pengaturan mediashare (minimum nominal, tampilan player, antrian)
-- ❌ Integrasi API (`GET/PUT /overlay/mediashare` atau dari `/overlay/settings`)
+- ✅ UI pengaturan mediashare — minimum nominal, font, warna, border toggle
+- ✅ Integrasi API (`GET/PUT /overlay/mediashare-template`)
+- ✅ Tombol Tes MediaShare — `POST /overlay/test-mediashare` broadcast WS ke widget
 
 ---
 
-## Halaman OBS Browser Source
+## Overlay — Milestone (`/overlay/milestone`)
 
-- ❌ `/obs/alert?key={streamKey}` — WebSocket listener, animasi alert, TTS, antrian alert, background transparan
-- ❌ `/obs/mediashare?key={streamKey}` — WebSocket listener, embed YouTube/TikTok, antrian media
+- ✅ Route & sidebar tab tersedia
+- ✅ Halaman pengaturan milestone — target amount, template, warna, font, border toggle
+- ✅ Preview real-time sesuai pengaturan
+- ✅ Integrasi API (`GET/PUT /overlay/milestone`)
+- ✅ URL widget untuk OBS
+
+---
+
+## Overlay — Subathon (`/overlay/subathon`)
+
+- ✅ Route & sidebar tab tersedia
+- ✅ Halaman pengaturan subathon — initial time, aturan tambah waktu per nominal donasi
+- ✅ Preview real-time countdown sesuai pengaturan
+- ✅ `ControlPanel` — tombol Start/Pause, input tambah waktu (jam/menit/detik), tombol Tes Alert
+- ✅ Integrasi API (`GET/PUT /overlay/subathon`, `POST /overlay/subathon/control`)
+- ✅ URL widget untuk OBS
+
+---
+
+## Halaman OBS Browser Source (`/widget/*`)
+
+- ✅ `/widget/alert?key={streamKey}` — WebSocket listener, animasi alert, TTS, antrian alert, background transparan
+- ✅ `/widget/mediashare?key={streamKey}` — WebSocket listener, embed YouTube/TikTok, antrian media
+- ✅ `/widget/milestone?key={streamKey}` — WebSocket listener, progress bar, animasi pencapaian
+- ✅ `/widget/subathon?key={streamKey}` — WebSocket listener, countdown timer, popup notifikasi tambah waktu, sinkronisasi state dari BE
 - ✅ Dockerfile untuk frontend
 
 ---
@@ -115,13 +138,10 @@ Legend: ✅ Done · 🔧 In Progress / Sliced (UI ada, integrasi BE belum) · �
 
 ## Konfigurasi & Infrastruktur
 
-- ✅ `lib/axios.ts` — Axios instance
-- ✅ `lib/api-endpoints.ts` — endpoint LOGIN, REGISTER
-- ✅ `lib/env.ts` — `Env.SERVER_ENDPOINT`
+- ✅ `lib/axios.ts` — Axios instance dengan JWT interceptor (attach token dari session ke setiap request)
+- ✅ `lib/api-endpoints.ts` — endpoint lengkap: auth, overlay (alert, mediashare, milestone, subathon, control, test), widget, WS
+- ✅ `lib/env.ts` — `Env.SERVER_ENDPOINT` + `Env.WS_ENDPOINT`
 - ✅ `providers/NextAuthProvider.tsx`
 - ✅ `providers/ProgressBarProvider.tsx`
-- ❌ Tambah endpoint baru di `api-endpoints.ts` (donate, overlay, wallet, user, dll.)
-- ❌ Axios interceptor — attach JWT token dari session ke setiap request (Authorization header)
-- ❌ Setup `NEXT_PUBLIC_WS_URL` di env untuk koneksi WebSocket OBS
 - ✅ `Dockerfile` + `docker-compose.yml` di root
 - ❌ Google OAuth env (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`) di `.env.local`

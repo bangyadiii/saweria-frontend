@@ -29,10 +29,15 @@ export const OVERLAY_MEDIASHARE_RULES_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/mediashare/rules";
 export const OVERLAY_MEDIASHARE_TEMPLATE_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/mediashare/template";
-export const OVERLAY_QR_ENDPOINT: string =
-    SERVER_ENDPOINT + "/overlay/qr";
+export const OVERLAY_QR_ENDPOINT: string = SERVER_ENDPOINT + "/overlay/qr";
 export const OVERLAY_MILESTONE_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/milestone";
+export const OVERLAY_SUBATHON_ENDPOINT: string =
+    SERVER_ENDPOINT + "/overlay/subathon";
+export const OVERLAY_SUBATHON_TEST_ENDPOINT: string =
+    SERVER_ENDPOINT + "/overlay/subathon/test";
+export const OVERLAY_SUBATHON_CONTROL_ENDPOINT: string =
+    SERVER_ENDPOINT + "/overlay/subathon/control";
 
 // Donation
 export const DONATE_ENDPOINT = (username: string) =>
