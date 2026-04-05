@@ -9,8 +9,13 @@ export const REFRESH_TOKEN_ENDPOINT: string = SERVER_ENDPOINT + "/auth/refresh";
 
 // User
 export const ME_ENDPOINT: string = SERVER_ENDPOINT + "/users/me";
+export const ME_WEBHOOK_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook";
+export const ME_WEBHOOK_RESET_TOKEN_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook/reset-token";
+export const ME_WEBHOOK_TEST_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook/test";
 export const PUBLIC_PROFILE_ENDPOINT = (username: string) =>
     `${SERVER_ENDPOINT}/users/${username}`;
+export const PUBLIC_MEDIASHARE_ENDPOINT = (username: string) =>
+    `${SERVER_ENDPOINT}/users/${username}/mediashare`;
 
 // Overlay
 export const OVERLAY_SETTINGS_ENDPOINT: string =
@@ -38,6 +43,8 @@ export const OVERLAY_SUBATHON_TEST_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/subathon/test";
 export const OVERLAY_SUBATHON_CONTROL_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/subathon/control";
+export const OVERLAY_LEADERBOARD_ENDPOINT: string =
+    SERVER_ENDPOINT + "/overlay/leaderboard";
 
 // Donation
 export const DONATE_ENDPOINT = (username: string) =>

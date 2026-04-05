@@ -10,6 +10,7 @@ const tabs = [
   { id: "subathon", label: "Subathon", href: "/subathon" },
   { id: "qrcode", label: "QR Code", href: "/qrcode" },
   { id: "milestone", label: "Milestone", href: "/milestone" },
+  { id: "leaderboard", label: "Leaderboard", href: "/leaderboard" },
 ];
 
 function OverlaySidebar() {

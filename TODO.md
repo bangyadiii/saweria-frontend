@@ -78,12 +78,23 @@ Legend: ✅ Done · 🔧 In Progress / Sliced (UI ada, integrasi BE belum) · �
 
 ---
 
+## Overlay — Leaderboard (`/overlay/leaderboard`)
+
+- ✅ Route & sidebar tab tersedia
+- ✅ Halaman pengaturan leaderboard — judul, warna, font, border toggle, sembunyikan nominal, rentang waktu, jumlah donatur
+- ✅ Preview real-time sesuai pengaturan
+- ✅ Integrasi API (`GET/PUT /overlay/leaderboard`)
+- ✅ URL widget untuk OBS
+
+---
+
 ## Halaman OBS Browser Source (`/widget/*`)
 
 - ✅ `/widget/alert?key={streamKey}` — WebSocket listener, animasi alert, TTS, antrian alert, background transparan
 - ✅ `/widget/mediashare?key={streamKey}` — WebSocket listener, embed YouTube/TikTok, antrian media
 - ✅ `/widget/milestone?key={streamKey}` — WebSocket listener, progress bar, animasi pencapaian
 - ✅ `/widget/subathon?key={streamKey}` — WebSocket listener, countdown timer, popup notifikasi tambah waktu, sinkronisasi state dari BE
+- ✅ `/widget/leaderboard?key={streamKey}` — HTTP fetch leaderboard data, auto-refresh saat donation masuk via WS, mendukung filter rentang waktu
 - ✅ Dockerfile untuk frontend
 
 ---

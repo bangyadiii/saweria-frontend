@@ -29,7 +29,7 @@ type Donation = {
   donor_name: string;
   amount: number;
   message?: string;
-  status: string;
+  payment_status: string;
   created_at: string;
 };
 
@@ -233,7 +233,9 @@ export default function DonationsPage() {
                       <td className="py-2 pr-4 text-gray-500 max-w-[180px] truncate">
                         {d.message || "—"}
                       </td>
-                      <td className="py-2 pr-4">{statusBadge(d.status)}</td>
+                      <td className="py-2 pr-4">
+                        {statusBadge(d.payment_status)}
+                      </td>
                       <td className="py-2 text-gray-500">
                         {new Date(d.created_at).toLocaleDateString("id-ID")}
                       </td>

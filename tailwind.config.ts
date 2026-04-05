@@ -67,6 +67,15 @@ export default {
                 mono: "var(--font-mono)",
                 sans: "var(--font-sans)",
             },
+            keyframes: {
+                marquee: {
+                    "0%": { transform: "translateX(0%)" },
+                    "100%": { transform: "translateX(-50%)" },
+                },
+            },
+            animation: {
+                marquee: "marquee 18s linear infinite",
+            },
         },
     },
     plugins: [require("tailwindcss-animate")],
