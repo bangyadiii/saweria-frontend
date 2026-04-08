@@ -10,6 +10,7 @@ import {
   DONATE_ENDPOINT,
   PUBLIC_PROFILE_ENDPOINT,
   PUBLIC_MEDIASHARE_ENDPOINT,
+  PUBLIC_MABAR_ENDPOINT,
 } from "@/lib/api-endpoints";
 import {
   Form,
@@ -219,6 +220,11 @@ export default function DonationPage({
   const [mediashare, setMediashare] = React.useState<MediashareSettings | null>(
     null,
   );
+  const [mabarInfo, setMabarInfo] = React.useState<{
+    mabar_enabled: boolean;
+    mabar_keyword: string;
+    mabar_minimum_amount: number;
+  } | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [selectedMedia, setSelectedMedia] = React.useState<MediaType>(null);
   const [voiceBlob, setVoiceBlob] = React.useState<Blob | null>(null);
@@ -252,6 +258,16 @@ export default function DonationPage({
       .get<{ data: MediashareSettings }>(PUBLIC_MEDIASHARE_ENDPOINT(username))
       .then((res) => setMediashare(res.data.data))
       .catch(() => setMediashare(null));
+    $axios
+      .get<{
+        data: {
+          mabar_enabled: boolean;
+          mabar_keyword: string;
+          mabar_minimum_amount: number;
+        };
+      }>(PUBLIC_MABAR_ENDPOINT(username))
+      .then((res) => setMabarInfo(res.data?.data ?? null))
+      .catch(() => {});
   }, [username]);
 
   const msEnabled = !!(
@@ -480,6 +496,19 @@ export default function DonationPage({
                     </FormItem>
                   )}
                 />
+                {mabarInfo?.mabar_enabled && (
+                  <div className="mt-2 border border-dashed border-blue-400 bg-blue-50 rounded p-3 text-xs font-mono text-blue-800">
+                    Ketik{" "}
+                    <strong>{mabarInfo.mabar_keyword} [username_game]</strong>{" "}
+                    di pesan (min.{" "}
+                    {new Intl.NumberFormat("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                      maximumFractionDigits: 0,
+                    }).format(mabarInfo.mabar_minimum_amount)}
+                    ) untuk masuk antrian Mabar!
+                  </div>
+                )}
               </div>
 
               {/* Media */}

@@ -36,6 +36,14 @@ const menus = [
     backgroundColor: "bg-red-300",
     path: "/integration",
   },
+  {
+    title: "Mabar Queue",
+    description:
+      "Kelola antrian mabar dari donasi yang menggunakan kata kunci khusus.",
+    Icon: RaccoonHappy,
+    backgroundColor: "bg-blue-300",
+    path: "/mabar",
+  },
 ];
 
 function Dashboard() {

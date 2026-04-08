@@ -9,9 +9,12 @@ export const REFRESH_TOKEN_ENDPOINT: string = SERVER_ENDPOINT + "/auth/refresh";
 
 // User
 export const ME_ENDPOINT: string = SERVER_ENDPOINT + "/users/me";
-export const ME_WEBHOOK_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook";
-export const ME_WEBHOOK_RESET_TOKEN_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook/reset-token";
-export const ME_WEBHOOK_TEST_ENDPOINT: string = SERVER_ENDPOINT + "/users/me/webhook/test";
+export const ME_WEBHOOK_ENDPOINT: string =
+    SERVER_ENDPOINT + "/users/me/webhook";
+export const ME_WEBHOOK_RESET_TOKEN_ENDPOINT: string =
+    SERVER_ENDPOINT + "/users/me/webhook/reset-token";
+export const ME_WEBHOOK_TEST_ENDPOINT: string =
+    SERVER_ENDPOINT + "/users/me/webhook/test";
 export const PUBLIC_PROFILE_ENDPOINT = (username: string) =>
     `${SERVER_ENDPOINT}/users/${username}`;
 export const PUBLIC_MEDIASHARE_ENDPOINT = (username: string) =>
@@ -74,3 +77,14 @@ export const OVERLAY_TEST_MEDIASHARE_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/test-mediashare";
 export const OVERLAY_CONTROL_ENDPOINT: string =
     SERVER_ENDPOINT + "/overlay/control";
+
+// Mabar
+export const OVERLAY_MABAR_ENDPOINT: string =
+    SERVER_ENDPOINT + "/overlay/mabar";
+export const MABAR_QUEUE_ENDPOINT: string = SERVER_ENDPOINT + "/mabar/queue";
+export const MABAR_QUEUE_REORDER_ENDPOINT: string =
+    SERVER_ENDPOINT + "/mabar/queue/reorder";
+export const MABAR_QUEUE_DONE_ENDPOINT = (id: string): string =>
+    `${SERVER_ENDPOINT}/mabar/queue/${id}/done`;
+export const PUBLIC_MABAR_ENDPOINT = (username: string): string =>
+    `${SERVER_ENDPOINT}/users/${username}/mabar`;
