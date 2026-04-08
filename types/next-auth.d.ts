@@ -4,9 +4,9 @@ export interface CustomAuthUser extends User {
     id: number;
     username: string;
     email: string;
-    profileImage: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    profile_image: string | null;
+    created_at: Date;
+    updated_at: Date;
     streamKey: string | null;
     token: string;
 }
@@ -22,9 +22,9 @@ declare module "next-auth" {
         id: number;
         username: string;
         email: string;
-        profileImage: string | null;
-        createdAt: Date;
-        updatedAt: Date;
+        profile_image: string | null;
+        created_at: Date;
+        updated_at: Date;
         streamKey: string | null;
         token: string;
     }

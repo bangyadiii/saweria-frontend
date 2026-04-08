@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 import $axios from "@/lib/axios";
 import { isAxiosError } from "axios";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 
 const formSchema = z
   .object({
@@ -48,9 +49,9 @@ interface RegisterResponse {
       id: number;
       email: string;
       username: string;
-      profileImage: string | null;
-      createdAt: Date;
-      updatedAt: Date;
+      profile_image: string | null;
+      created_at: Date;
+      updated_at: Date;
       streamKey: string | null;
     };
     token: string;
@@ -199,9 +200,9 @@ function Register() {
           </Form>
           <p className="text-center text-sm text-muted-foreground mt-4">
             Sudah punya akun?{" "}
-            <a href="/login" className="underline font-medium">
+            <Link href="/login" className="underline font-medium">
               Login di sini
-            </a>
+            </Link>
           </p>
         </CardContent>
       </Card>

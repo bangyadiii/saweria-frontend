@@ -98,9 +98,7 @@ export default function Profile() {
             <Avatar className="w-24 h-24">
               <AvatarImage src={profile?.profile_image} />
               <AvatarFallback>
-                {(profile?.display_name ?? profile?.username ?? "?")
-                  .charAt(0)
-                  .toUpperCase()}
+                {(profile?.display_name ?? "?").charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <input

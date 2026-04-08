@@ -10,21 +10,21 @@ import $axios from "@/lib/axios";
 import { JWT } from "next-auth/jwt";
 
 export async function login(
-    credentials: Record<"email" | "password", string> | undefined
+    credentials: Record<"email" | "password", string> | undefined,
 ): Promise<{
     token: string;
     id: number;
     email: string;
     username: string;
-    profileImage: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    profile_image: string | null;
+    created_at: Date;
+    updated_at: Date;
     streamKey: string | null;
 }> {
     try {
         const response = await $axios.post<LoginResponse>(
             LOGIN_ENDPOINT,
-            credentials
+            credentials,
         );
         const user = {
             ...response.data.data.user,

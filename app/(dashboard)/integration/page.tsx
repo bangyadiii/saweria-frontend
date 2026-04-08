@@ -17,9 +17,9 @@ import {
 } from "@/lib/api-endpoints";
 
 interface WebhookSettings {
-  webhookEnabled: boolean;
-  webhookUrl: string | null;
-  webhookToken: string | null;
+  webhook_enabled: boolean;
+  webhook_url: string | null;
+  webhook_token: string | null;
 }
 
 export default function IntegrationPage() {
@@ -46,9 +46,9 @@ export default function IntegrationPage() {
   useEffect(() => {
     $axios.get(ME_ENDPOINT).then((res) => {
       const data: WebhookSettings = res.data.data;
-      setWebhookEnabled(data.webhookEnabled ?? false);
-      setWebhookUrl(data.webhookUrl ?? "");
-      setWebhookToken(data.webhookToken ?? "");
+      setWebhookEnabled(data.webhook_enabled ?? false);
+      setWebhookUrl(data.webhook_url ?? "");
+      setWebhookToken(data.webhook_token ?? "");
     });
   }, []);
 
@@ -65,9 +65,9 @@ export default function IntegrationPage() {
         url: webhookUrl || null,
       });
       const data: WebhookSettings = res.data.data;
-      setWebhookEnabled(data.webhookEnabled);
-      setWebhookUrl(data.webhookUrl ?? "");
-      setWebhookToken(data.webhookToken ?? "");
+      setWebhookEnabled(data.webhook_enabled);
+      setWebhookUrl(data.webhook_url ?? "");
+      setWebhookToken(data.webhook_token ?? "");
       toast({ title: "Pengaturan webhook disimpan" });
     } catch (err: unknown) {
       const msg =
@@ -84,7 +84,7 @@ export default function IntegrationPage() {
     try {
       const res = await $axios.post(ME_WEBHOOK_RESET_TOKEN_ENDPOINT);
       const data: WebhookSettings = res.data.data;
-      setWebhookToken(data.webhookToken ?? "");
+      setWebhookToken(data.webhook_token ?? "");
       toast({ title: "Token baru berhasil dibuat" });
     } catch {
       toast({ title: "Gagal mereset token", variant: "destructive" });

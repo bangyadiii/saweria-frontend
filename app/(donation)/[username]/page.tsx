@@ -360,6 +360,7 @@ export default function DonationPage({
       setLoading(false);
     }
   };
+  console.log({ profile, mediashare, mabarInfo });
 
   const displayName = profile?.display_name ?? profile?.username ?? username;
 

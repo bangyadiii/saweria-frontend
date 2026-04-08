@@ -2,9 +2,9 @@ interface UserType {
     id: number;
     email: string;
     username: string;
-    profileImage: string | null;
-    createdAt: Date;
-    updatedAt: Date;
+    profile_image: string | null;
+    created_at: Date;
+    updated_at: Date;
     streamKey: string | null;
 }
 

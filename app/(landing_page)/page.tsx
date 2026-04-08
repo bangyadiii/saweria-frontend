@@ -4,12 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 async function LandingPage() {
   const session = await getServerSession();
   return (
-    <div className="">
+    <div className="mb-10 justify-center">
       <div className="text-center flex items-center flex-col">
         <Logo />
         <p className="font-medium text-4xl">
@@ -101,7 +100,11 @@ async function LandingPage() {
           height={300}
         />
         <p className="text-2xl ">ready to join saweria?</p>
-        <Button className="mt-3">Register</Button>
+        {!session?.user && (
+          <Link href="/register">
+            <Button>Register</Button>
+          </Link>
+        )}
       </div>
     </div>
   );
